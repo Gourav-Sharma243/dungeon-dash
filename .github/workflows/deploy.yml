@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install Dependencies
         run: npm install
@@ -25,4 +25,4 @@ jobs:
         run: npx vite build
 
       - name: Deploy to Firebase
-        run: npx firebase-tools deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+        run: npx firebase-tools deploy --only hosting --project dungeon-dash-9c803 --non-interactive --token ${{ secrets.FIREBASE_TOKEN }}
