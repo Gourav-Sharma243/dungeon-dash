@@ -1,0 +1,27 @@
+{
+  "name": "dungeon-dash",
+  "version": "1.0.0",
+  "description": "> A mobile-ready roguelike dungeon crawler built with a **custom HTML5 game engine**, **Node.js backend**, and **PWA** support.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gourav-Sharma243/dungeon-dash.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Gourav-Sharma243/dungeon-dash/issues"
+  },
+  "homepage": "https://github.com/Gourav-Sharma243/dungeon-dash#readme",
+  "devDependencies": {
+    "vite": "^8.1.0"
+  }
+}

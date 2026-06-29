@@ -1,0 +1,9 @@
+node_modules/
+server/node_modules/
+.DS_Store
+*.db
+.firebase/
+.firebaserc
+firebase-debug.log
+.env
+dist/

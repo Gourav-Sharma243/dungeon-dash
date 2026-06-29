@@ -1,0 +1,18 @@
+{
+    "name": "Dungeon Dash",
+    "short_name": "DungeonDash",
+    "description": "A mobile-ready roguelike dungeon crawler with procedural levels and daily challenges.",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a0a1a",
+    "theme_color": "#0a0a1a",
+    "categories": ["games", "entertainment"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a1a' width='100' height='100' rx='15'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23ffdd44'>⚔️</text></svg>",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}

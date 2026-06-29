@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- SEO Meta Tags -->
+    <title>Dungeon Dash — Roguelike Dungeon Crawler</title>
+    <meta name="description" content="A mobile-ready roguelike dungeon crawler built with a custom HTML5 game engine. Procedural dungeons, real-time combat, and daily challenges.">
+    <meta name="keywords" content="dungeon dash, roguelike, game, HTML5, mobile game, dungeon crawler">
+    <meta name="author" content="Dungeon Dash Team">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dungeon Dash — Roguelike Dungeon Crawler">
+    <meta property="og:description" content="Explore procedural dungeons, fight enemies, and compete on the leaderboard.">
+    <meta property="og:type" content="website">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Prevent mobile browser behaviors that interfere with game -->
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-title">DUNGEON DASH</h1>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <p class="loading-text" id="loadingText">Initializing engine...</p>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="gameContainer" class="game-container hidden">
+        <canvas id="game" width="800" height="800"></canvas>
+
+        <!-- Touch Controls Overlay (mobile only) -->
+        <div id="touchControls" class="touch-controls hidden">
+            <div id="joystickArea" class="joystick-area">
+                <div id="joystickBase" class="joystick-base">
+                    <div id="joystickStick" class="joystick-stick"></div>
+                </div>
+            </div>
+            <div id="actionArea" class="action-area">
+                <button id="attackBtn" class="action-btn attack-btn">⚔️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen toggle -->
+    <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen">⛶</button>
+
+    <!-- Main Script (ES Module) -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
