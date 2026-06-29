@@ -79,7 +79,7 @@ export class MenuScene extends Scene {
         input.endFrame();
     }
 
-        render(ctx) {
+    render(ctx) {
         const { width, height } = this.context.engine;
 
         const grad = ctx.createLinearGradient(0, 0, 0, height);
@@ -112,34 +112,37 @@ export class MenuScene extends Scene {
             ctx.fillRect(torch.x - 2, torch.y - 8, 4, 5);
         }
 
+        const isMobile = height < 500;
         const titleY = height * 0.15;
+        const titleSize = isMobile ? 40 : 52;
+        const subtitleOffset = isMobile ? 70 : 95;
+        const heroY = isMobile ? height * 0.40 : titleY + 155;
+        const menuStartY = isMobile ? height * 0.58 : height * 0.52;
+        const menuSpacing = isMobile ? 42 : 50;
 
         ctx.fillStyle = '#000';
-        ctx.font = 'bold 52px Outfit, sans-serif';
+        ctx.font = `bold ${titleSize}px Outfit, sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText('DUNGEON', width / 2 + 3, titleY + 3);
-        ctx.fillText('DASH', width / 2 + 3, titleY + 60 + 3);
+        ctx.fillText('DASH', width / 2 + 3, titleY + (isMobile ? 45 : 60) + 3);
 
         const titleGrad = ctx.createLinearGradient(0, titleY - 30, 0, titleY + 80);
         titleGrad.addColorStop(0, '#ffdd44');
         titleGrad.addColorStop(0.5, '#ff8800');
         titleGrad.addColorStop(1, '#ff4400');
         ctx.fillStyle = titleGrad;
-        ctx.font = 'bold 52px Outfit, sans-serif';
+        ctx.font = `bold ${titleSize}px Outfit, sans-serif`;
         ctx.fillText('DUNGEON', width / 2, titleY);
-        ctx.fillText('DASH', width / 2, titleY + 60);
+        ctx.fillText('DASH', width / 2, titleY + (isMobile ? 45 : 60));
 
         const subtitleAlpha = 0.5 + Math.sin(this.timer * 2) * 0.3;
         ctx.globalAlpha = subtitleAlpha;
         ctx.fillStyle = '#aaaacc';
         ctx.font = '14px Outfit, sans-serif';
-        ctx.fillText('A Roguelike Dungeon Crawler', width / 2, titleY + 95);
+        ctx.fillText('A Roguelike Dungeon Crawler', width / 2, titleY + subtitleOffset);
         ctx.globalAlpha = 1;
 
-        this._drawHeroPreview(ctx, width / 2, titleY + 155);
-
-        const menuStartY = height * 0.52;
-        const menuSpacing = 50;
+        this._drawHeroPreview(ctx, width / 2, heroY);
 
         for (let i = 0; i < this.menuItems.length; i++) {
             const item = this.menuItems[i];
@@ -150,7 +153,7 @@ export class MenuScene extends Scene {
                 
                 const pulse = 0.8 + Math.sin(this.timer * 4) * 0.2;
                 ctx.fillStyle = `rgba(255, 170, 50, ${0.15 * pulse})`;
-                const boxWidth = 280;
+                const boxWidth = Math.min(280, width - 40);
                 ctx.fillRect(width / 2 - boxWidth / 2, y - 18, boxWidth, 36);
                 ctx.strokeStyle = `rgba(255, 170, 50, ${0.5 * pulse})`;
                 ctx.lineWidth = 1;
@@ -160,7 +163,7 @@ export class MenuScene extends Scene {
                 ctx.fillStyle = '#ffaa33';
                 ctx.font = '16px "Press Start 2P", monospace';
                 ctx.textAlign = 'right';
-                ctx.fillText('▶', width / 2 - 130 + arrowBob, y + 6);
+                ctx.fillText('▶', width / 2 - boxWidth / 2 + 20 + arrowBob, y + 6);
             }
 
             ctx.fillStyle = isSelected ? '#ffdd66' : '#8888aa';
@@ -227,8 +230,9 @@ export class MenuScene extends Scene {
 
         _getMenuItemAtPosition(px, py) {
         const { height } = this.context.engine;
-        const menuStartY = height * 0.52;
-        const menuSpacing = 50;
+        const isMobile = height < 500;
+        const menuStartY = isMobile ? height * 0.58 : height * 0.52;
+        const menuSpacing = isMobile ? 42 : 50;
 
         for (let i = 0; i < this.menuItems.length; i++) {
             const y = menuStartY + i * menuSpacing;

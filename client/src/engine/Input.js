@@ -79,6 +79,11 @@ export class Input {
         this._released.clear();
         this.pointerClicked = false;
         this.actionTouch = false;
+        
+        const btn = document.getElementById('attackBtn');
+        if (btn && this._actionTouchId === null) {
+            btn.style.transform = 'scale(1)';
+        }
     }
 
         _bindEvents() {
@@ -113,26 +118,26 @@ export class Input {
             this.pointerDown = false;
         });
 
-        this.canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
+        window.addEventListener('touchstart', (e) => {
+            if (e.target.tagName !== 'BUTTON') e.preventDefault();
             this._handleTouchStart(e);
         }, { passive: false });
 
-        this.canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
+        window.addEventListener('touchmove', (e) => {
+            if (e.target.tagName !== 'BUTTON') e.preventDefault();
             this._handleTouchMove(e);
         }, { passive: false });
 
-        this.canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
+        window.addEventListener('touchend', (e) => {
+            if (e.target.tagName !== 'BUTTON') e.preventDefault();
             this._handleTouchEnd(e);
         }, { passive: false });
 
-        this.canvas.addEventListener('touchcancel', (e) => {
+        window.addEventListener('touchcancel', (e) => {
             this._handleTouchEnd(e);
         });
 
-        this.canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        window.addEventListener('contextmenu', (e) => e.preventDefault());
     }
 
         _updatePointer(e) {
@@ -163,10 +168,16 @@ export class Input {
                 this.joystick.dx = 0;
                 this.joystick.dy = 0;
                 this.joystick.distance = 0;
+                
+                const stick = document.getElementById('joystickStick');
+                if (stick) stick.style.transform = `translate(0px, 0px)`;
             } else {
                 
                 this.actionTouch = true;
                 this._actionTouchId = touch.identifier;
+                
+                const btn = document.getElementById('attackBtn');
+                if (btn) btn.style.transform = 'scale(0.9)';
             }
 
             this.pointer.x = x;
@@ -202,6 +213,11 @@ export class Input {
                     this.joystick.dy = 0;
                     this.joystick.distance = 0;
                 }
+                
+                const stick = document.getElementById('joystickStick');
+                if (stick) {
+                    stick.style.transform = `translate(${this.joystick.dx * 30}px, ${this.joystick.dy * 30}px)`;
+                }
             }
 
             this.pointer.x = (touch.clientX - rect.left) * scaleX;
@@ -217,9 +233,14 @@ export class Input {
                 this.joystick.dy = 0;
                 this.joystick.distance = 0;
                 this.joystick.touchId = null;
+                
+                const stick = document.getElementById('joystickStick');
+                if (stick) stick.style.transform = `translate(0px, 0px)`;
             }
             if (touch.identifier === this._actionTouchId) {
                 this._actionTouchId = null;
+                const btn = document.getElementById('attackBtn');
+                if (btn) btn.style.transform = 'scale(1)';
             }
         }
 
@@ -229,7 +250,20 @@ export class Input {
     }
 
         destroy() {
-        
         console.log('[Input] Destroyed');
+    }
+
+    showControls() {
+        const touchControls = document.getElementById('touchControls');
+        if (this.isTouchDevice && touchControls) {
+            touchControls.classList.remove('hidden');
+        }
+    }
+
+    hideControls() {
+        const touchControls = document.getElementById('touchControls');
+        if (touchControls) {
+            touchControls.classList.add('hidden');
+        }
     }
 }

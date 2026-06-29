@@ -130,7 +130,6 @@ html, body {
     bottom: 20px;
     width: 140px;
     height: 140px;
-    pointer-events: auto;
 }
 
 .joystick-base {
@@ -159,7 +158,6 @@ html, body {
     position: absolute;
     right: 30px;
     bottom: 30px;
-    pointer-events: auto;
 }
 
 .action-btn {

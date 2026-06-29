@@ -13,8 +13,9 @@ export class GameOverScene extends Scene {
 
         enter() {
         super.enter();
+        this.context.input.hideControls();
 
-                this.timer = 0;
+        this.timer = 0;
 
                 this.displayScore = 0;
 
@@ -198,21 +199,29 @@ export class GameOverScene extends Scene {
         }
 
         if (this.timer > 1.5) {
-            const menuY = height - 80;
+            const isMobile = height < 500;
+            const menuY = isMobile ? height - 120 : height - 80;
             const alpha = Math.min((this.timer - 1.5) / 0.5, 1);
             ctx.globalAlpha = alpha;
 
             for (let i = 0; i < this.menuItems.length; i++) {
                 const item = this.menuItems[i];
-                const x = width / 2 + (i - 0.5) * 220;
+                let x, y;
+                if (isMobile) {
+                    x = width / 2;
+                    y = menuY + i * 40;
+                } else {
+                    x = width / 2 + (i - 0.5) * 220;
+                    y = menuY;
+                }
                 const isSelected = i === this.selectedIndex;
 
                 if (isSelected) {
                     ctx.fillStyle = 'rgba(255, 170, 50, 0.15)';
-                    ctx.fillRect(x - 90, menuY - 15, 180, 30);
+                    ctx.fillRect(x - 90, y - 15, 180, 30);
                     ctx.strokeStyle = 'rgba(255, 170, 50, 0.4)';
                     ctx.lineWidth = 1;
-                    ctx.strokeRect(x - 90, menuY - 15, 180, 30);
+                    ctx.strokeRect(x - 90, y - 15, 180, 30);
                 }
 
                 ctx.fillStyle = isSelected ? '#ffdd66' : '#888';
@@ -222,10 +231,8 @@ export class GameOverScene extends Scene {
                 const iconText = item.icon;
 
                 ctx.textAlign = 'center';
-
-                ctx.fillText(iconText, x - 50, menuY + 5);
-
-                ctx.fillText(labelText, x + 15, menuY + 5);
+                ctx.fillText(iconText, x - 50, y + 5);
+                ctx.fillText(labelText, x + 15, y + 5);
             }
 
             ctx.globalAlpha = 1;
@@ -257,11 +264,19 @@ export class GameOverScene extends Scene {
 
         _getMenuItemAt(px, py) {
         const { width, height } = this.context.engine;
-        const menuY = height - 80;
+        const isMobile = height < 500;
+        const menuY = isMobile ? height - 120 : height - 80;
 
         for (let i = 0; i < this.menuItems.length; i++) {
-            const x = width / 2 + (i - 0.5) * 200;
-            if (px >= x - 90 && px <= x + 90 && py >= menuY - 15 && py <= menuY + 15) {
+            let x, y;
+            if (isMobile) {
+                x = width / 2;
+                y = menuY + i * 40;
+            } else {
+                x = width / 2 + (i - 0.5) * 220;
+                y = menuY;
+            }
+            if (px >= x - 90 && px <= x + 90 && py >= y - 15 && py <= y + 15) {
                 return i;
             }
         }

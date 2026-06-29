@@ -65,6 +65,7 @@ export class GameScene extends Scene {
 
         enter() {
         super.enter();
+        this.context.input.showControls();
 
         const { engine, input, audio } = this.context;
         const level = this.options.startLevel || 1;
