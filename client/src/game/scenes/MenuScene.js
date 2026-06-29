@@ -5,8 +5,9 @@ import { GameScene } from './GameScene.js';
 export class MenuScene extends Scene {
         enter() {
         super.enter();
+        this.context.input.hideControls();
 
-                this.timer = 0;
+        this.timer = 0;
 
                 this.selectedIndex = 0;
 
@@ -123,6 +124,7 @@ export class MenuScene extends Scene {
         ctx.fillStyle = '#000';
         ctx.font = `bold ${titleSize}px Outfit, sans-serif`;
         ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
         ctx.fillText('DUNGEON', width / 2 + 3, titleY + 3);
         ctx.fillText('DASH', width / 2 + 3, titleY + (isMobile ? 45 : 60) + 3);
 
@@ -149,6 +151,8 @@ export class MenuScene extends Scene {
             const y = menuStartY + i * menuSpacing;
             const isSelected = i === this.selectedIndex;
 
+            ctx.textBaseline = 'alphabetic';
+
             if (isSelected) {
                 
                 const pulse = 0.8 + Math.sin(this.timer * 4) * 0.2;
@@ -163,7 +167,7 @@ export class MenuScene extends Scene {
                 ctx.fillStyle = '#ffaa33';
                 ctx.font = '16px "Press Start 2P", monospace';
                 ctx.textAlign = 'right';
-                ctx.fillText('▶', width / 2 - boxWidth / 2 + 20 + arrowBob, y + 6);
+                ctx.fillText('▶', width / 2 - 95 + arrowBob, y + 6);
             }
 
             ctx.fillStyle = isSelected ? '#ffdd66' : '#8888aa';
