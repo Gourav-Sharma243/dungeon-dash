@@ -89,9 +89,6 @@ import { MenuScene } from './game/scenes/MenuScene.js';
 
         sceneManager.push(new MenuScene(context));
 
-        // Add CI/CD test log
-        console.log('[App] Initialized successfully via GitHub Actions pipeline');
-
         // Run first frame
         engine.start();
 
